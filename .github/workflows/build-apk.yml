@@ -25,7 +25,7 @@ jobs:
         run: pip install --upgrade buildozer cython virtualenv
 
       - name: Compilar APK
-        run: buildozer -v android debug
+        run: yes | buildozer -v android debug
 
       - name: Enviar APK como artefato
         uses: actions/upload-artifact@v4
