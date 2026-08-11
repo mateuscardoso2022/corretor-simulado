@@ -25,7 +25,12 @@ jobs:
         run: pip install --upgrade buildozer cython virtualenv
 
       - name: Compilar APK
-        run: yes | buildozer -v android debug
+        run: |
+          for i in 1 2 3 4 5; do
+            yes | buildozer -v android debug && break
+            echo "Tentativa $i falhou (provavelmente erro 502 temporário). Tentando de novo em 30s..."
+            sleep 30
+          done
 
       - name: Enviar APK como artefato
         uses: actions/upload-artifact@v4
